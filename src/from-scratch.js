@@ -1,5 +1,16 @@
-/* eslint-disable max-classes-per-file */
-class Circle {
+class Rectangle {
+
+}
+
+class Vehicle {
+
+}
+
+class PasswordManager {
+
+}
+
+class TodoList {
 
 }
 
@@ -8,6 +19,9 @@ class BankAccount {
 }
 
 module.exports = {
-  Circle,
+  Rectangle,
+  Vehicle,
+  PasswordManager,
+  TodoList,
   BankAccount,
 };

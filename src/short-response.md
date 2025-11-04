@@ -1,0 +1,37 @@
+# Short Responses
+
+For this short response assignment, aim to write a response with the following qualities (your instructor will give you feedback on these areas):
+- [] Addresses all parts of the prompt
+- [] Accurately uses relevant technical terminology
+- [] Is free of grammar and spelling mistakes (double check with grammarly!)
+- [] Uses markdown to enhance readability (preview in VS Code with Command/Control + Shift + V)
+- [] Is easy to comprehend
+
+For each prompt below, write your response in the space provided. Aim to answer each prompt in 2-5 concise sentences. Make sure to preview your markdown to check how it is rendered before submitting.
+
+## Prompt 1
+
+With OOP in JavaScript, it's possible to use factory functions to achieve encapsulation and re-use them to make objects that look alike. However, factory functions have drawbacks and we often use classes instead.
+
+How would you explain to a budding developer what the drawbacks of using factory functions are and why it is better to use classes instead?
+
+## Response 1
+
+
+---
+
+## Prompt 2
+
+Explain what factors you should consider when deciding to make a property/method private? Provide an example to support your response.
+
+## Response 2
+
+
+---
+
+## Prompt 3
+
+Explain what factors you should consider when deciding to make a property/method static? Provide an example to support your response.
+
+## Response 3
+

@@ -1,259 +1,386 @@
 const path = require('path');
 const ScoreCounter = require('score-tests');
-const { Circle, BankAccount } = require('../src/from-scratch');
+const { Rectangle, Vehicle, PasswordManager, TodoList, BankAccount } = require('../src/from-scratch');
 
 const testSuiteName = 'From Scratch Tests';
 const scoresDir = path.join(__dirname, '..', 'scores');
 const scoreCounter = new ScoreCounter(testSuiteName, scoresDir);
 
 describe(testSuiteName, () => {
-  it('Circle - constructor function adds only instance properties to each instance, not methods', () => {
-    const radius1 = 4;
-    const color1 = 'red';
-    const circle1 = new Circle(radius1, color1);
-    expect(circle1).toEqual({ radius: radius1, color: color1 });
 
-    const radius2 = 8;
-    const color2 = 'green';
-    const circle2 = new Circle(radius2, color2);
-    expect(circle2).toEqual({ radius: radius2, color: color2 });
+  describe('Rectangle', () => {
+    it('constructor accepts length and width parameters', () => {
+      const myShape = new Rectangle(10, 5);
+      expect(myShape.length).toBe(10);
+      expect(myShape.width).toBe(5);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('getArea returns the area of the rectangle', () => {
+      const myShape = new Rectangle(10, 5);
+      expect(myShape.getArea()).toBe(50);
+
+      const myShape2 = new Rectangle(3, 3);
+      expect(myShape2.getArea()).toBe(9);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('getPerimeter returns the perimeter of the rectangle', () => {
+      const myShape = new Rectangle(10, 5);
+      expect(myShape.getPerimeter()).toBe(30); // 10 * 2 + 5 * 2
+
+      const myShape2 = new Rectangle(3, 3);
+      expect(myShape2.getPerimeter()).toBe(12); // 3 * 2 + 3 * 2
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('isSquare returns false when length and width are different', () => {
+      const myShape = new Rectangle(10, 5);
+      expect(myShape.isSquare()).toBe(false);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('isSquare returns true when length and width are equal', () => {
+      const myShape = new Rectangle(3, 3);
+      expect(myShape.isSquare()).toBe(true);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('length and width are public properties that can be mutated', () => {
+      const myShape = new Rectangle(10, 5);
+      expect(myShape.isSquare()).toBe(false);
+
+      myShape.width = 3;
+      myShape.length = 3;
+      expect(myShape.getArea()).toBe(9);
+      expect(myShape.getPerimeter()).toBe(12);
+      expect(myShape.isSquare()).toBe(true);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
   });
 
-  it('Circle - getArea correctly returns the area of the circle', () => {
-    const radius1 = 13;
-    const color1 = 'white';
-    const circle1 = new Circle(radius1, color1);
-    expect(circle1.getArea()).toEqual(Math.PI * radius1 ** 2);
+  describe('Vehicle', () => {
+    it('constructor accepts type and capacity parameters', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      expect(motorcycle.type).toBe('Motorcycle');
+      expect(motorcycle.capacity).toBe(2);
 
-    const radius2 = 7;
-    const color2 = 'pink';
-    const circle2 = new Circle(radius2, color2);
-    expect(circle2.getArea()).toEqual(Math.PI * radius2 ** 2);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
+    it('color defaults to "black" when not provided', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      expect(motorcycle.color).toBe('black');
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('color is set when provided as third parameter', () => {
+      const bus = new Vehicle('School Bus', 48, 'yellow');
+      expect(bus.color).toBe('yellow');
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('passengers is initialized as an empty array', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      expect(motorcycle.passengers).toEqual([]);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('addPassenger adds a passenger and returns the number of passengers', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      expect(motorcycle.addPassenger('Bonnie')).toBe(1);
+      expect(motorcycle.passengers).toEqual(['Bonnie']);
+
+      expect(motorcycle.addPassenger('Clyde')).toBe(2);
+      expect(motorcycle.passengers).toEqual(['Bonnie', 'Clyde']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('addPassenger returns -1 when capacity is full', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      motorcycle.addPassenger('Bonnie');
+      motorcycle.addPassenger('Clyde');
+
+      expect(motorcycle.addPassenger('Toto')).toBe(-1);
+      expect(motorcycle.passengers).toEqual(['Bonnie', 'Clyde']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('paint updates the vehicle color and returns the new color', () => {
+      const motorcycle = new Vehicle('Motorcycle', 2);
+      expect(motorcycle.color).toBe('black');
+
+      const newColor = motorcycle.paint('red');
+      expect(newColor).toBe('red');
+      expect(motorcycle.color).toBe('red');
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
   });
 
-  it('Circle - getCircumference correctly returns the circumference of the circle', () => {
-    const radius1 = 91;
-    const color1 = 'gray';
-    const circle1 = new Circle(radius1, color1);
-    expect(2 * Math.PI * radius1).toEqual(circle1.getCircumference());
+  describe('PasswordManager', () => {
+    it('constructor accepts a password parameter', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW).toBeDefined();
 
-    const radius2 = 12;
-    const color2 = 'yellow';
-    const circle2 = new Circle(radius2, color2);
-    expect(2 * Math.PI * radius2).toEqual(circle2.getCircumference());
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
+    it('password is private and cannot be accessed directly', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW.password).toBeUndefined();
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('checkPassword returns true when attempt matches the password', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW.checkPassword('abc')).toBe(true);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('checkPassword returns false when attempt does not match the password', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW.checkPassword('blah')).toBe(false);
+      expect(myPW.checkPassword('xyz')).toBe(false);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('setPassword returns false when oldPassword does not match', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW.setPassword('blah', 'foobar')).toBe(false);
+      expect(myPW.checkPassword('abc')).toBe(true); // password unchanged
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('setPassword updates password and returns true when oldPassword matches', () => {
+      const myPW = new PasswordManager('abc');
+      expect(myPW.setPassword('abc', 'foobar')).toBe(true);
+      expect(myPW.checkPassword('foobar')).toBe(true);
+      expect(myPW.checkPassword('abc')).toBe(false); // old password no longer works
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
   });
 
-  it('Circle - draw returns the right message with color of the circle', () => {
-    const radius1 = 3;
-    const color1 = 'purple';
-    const circle1 = new Circle(radius1, color1);
-    expect(circle1.draw()).toEqual(`Drawing a ${color1} circle.`);
+  describe('TodoList', () => {
+    it('constructor accepts a title parameter', () => {
+      const groceryList = new TodoList('groceries');
+      expect(groceryList.title).toBe('groceries');
 
-    const radius2 = 1;
-    const color2 = 'orange';
-    const circle2 = new Circle(radius2, color2);
-    expect(circle2.draw()).toEqual(`Drawing a ${color2} circle.`);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
+    it('items array is private and cannot be accessed directly', () => {
+      const groceryList = new TodoList('groceries');
+      expect(groceryList.items).toBeUndefined();
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('getItems returns an empty array initially', () => {
+      const groceryList = new TodoList('groceries');
+      expect(groceryList.getItems()).toEqual([]);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('addItem adds a new item and returns the new length', () => {
+      const groceryList = new TodoList('groceries');
+      expect(groceryList.addItem('bread')).toBe(1);
+      expect(groceryList.addItem('milk')).toBe(2);
+      expect(groceryList.addItem('eggs')).toBe(3);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('getItems returns the items after adding', () => {
+      const groceryList = new TodoList('groceries');
+      groceryList.addItem('bread');
+      groceryList.addItem('milk');
+      groceryList.addItem('eggs');
+      expect(groceryList.getItems()).toEqual(['bread', 'milk', 'eggs']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('removeItem removes an item and returns the removed item', () => {
+      const groceryList = new TodoList('groceries');
+      groceryList.addItem('bread');
+      groceryList.addItem('milk');
+      groceryList.addItem('eggs');
+
+      expect(groceryList.removeItem('milk')).toBe('milk');
+      expect(groceryList.getItems()).toEqual(['bread', 'eggs']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('removeItem returns null when item is not found', () => {
+      const groceryList = new TodoList('groceries');
+      groceryList.addItem('bread');
+      groceryList.addItem('milk');
+      groceryList.addItem('eggs');
+
+      expect(groceryList.removeItem('cheese')).toBe(null);
+      expect(groceryList.getItems()).toEqual(['bread', 'milk', 'eggs']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
+
+    it('getItems returns a copy of the array, not the original', () => {
+      const groceryList = new TodoList('groceries');
+      groceryList.addItem('bread');
+      groceryList.addItem('eggs');
+
+      const items = groceryList.getItems();
+      items.length = 0;
+
+      // The internal array should not be affected
+      expect(groceryList.getItems()).toEqual(['bread', 'eggs']);
+
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
   });
 
-  it('Circle - changeColor changes the color of the circle and returns the new color', () => {
-    const radius1 = 91;
-    const color1 = 'purple';
-    const circle1 = new Circle(radius1, color1);
-    expect(circle1.color).toEqual(color1);
+  describe('BankAccount', () => {
+    it('constructor only adds PUBLIC instance properties to each instance, not private properties or static methods', () => {
+      const firstName1 = 'John';
+      const lastName1 = 'Doe';
+      const balance1 = 100;
+      const bankAccount1 = new BankAccount(firstName1, lastName1, balance1);
+      expect(bankAccount1).toEqual({ firstName: firstName1, lastName: lastName1 });
 
-    const newColor1 = 'blue';
-    expect(circle1.changeColor(newColor1)).toEqual(newColor1);
-    expect(circle1.color).toEqual(newColor1);
+      const firstName2 = 'Jane';
+      const lastName2 = 'Doe';
+      const balance2 = 200;
+      const bankAccount2 = new BankAccount(firstName2, lastName2, balance2);
+      expect(bankAccount2).toEqual({ firstName: firstName2, lastName: lastName2 });
 
-    const radius2 = 12;
-    const color2 = 'orange';
-    const circle2 = new Circle(radius2, color2);
-    expect(circle2.color).toEqual(color2);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    const newColor2 = 'green';
-    circle2.changeColor(newColor2);
-    expect(circle2.color).toEqual(newColor2);
+    it('showBalance returns a message of the balance to two decimal places', () => {
+      const balance1 = 100;
+      const bankAccount1 = new BankAccount('Bob', 'Robertson', balance1);
+      expect(bankAccount1.showBalance()).toEqual(`Your balance is $100.00`);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      const balance2 = 12.34;
+      const bankAccount2 = new BankAccount('Sarah', 'Haras', balance2);
+      expect(bankAccount2.showBalance()).toEqual(`Your balance is $12.34`);
 
-  it('Circle - adds methods to the prototype', () => {
-    const circle1 = new Circle(10, 'yellow');
-    const circlePrototype = Object.getPrototypeOf(circle1);
-    expect(Object.getOwnPropertyNames(circlePrototype).sort()).toEqual([
-      'changeColor',
-      'constructor',
-      'draw',
-      'getArea',
-      'getCircumference',
-    ]);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+    it('defaults to a balance of 0 if a balance is not provided', () => {
+      const bankAccount = new BankAccount('John', 'Doe');
+      const balanceMsg = `Your balance is $0.00`;
+      expect(bankAccount.showBalance()).toEqual(balanceMsg);
 
-  it('BankAccount - constructor function only adds PUBLIC instance properties to each instance, not private properties or methods', () => {
-    const firstName1 = 'John';
-    const lastName1 = 'Doe';
-    const balance1 = 100;
-    const bankAccount1 = new BankAccount(firstName1, lastName1, balance1);
-    expect(bankAccount1).toEqual({ firstName: firstName1, lastName: lastName1 });
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    const firstName2 = 'Jane';
-    const lastName2 = 'Doe';
-    const balance2 = 200;
-    const bankAccount2 = new BankAccount(firstName2, lastName2, balance2);
-    expect(bankAccount2).toEqual({ firstName: firstName2, lastName: lastName2 });
+    it('deposit adds the amount to the balance and returns a message of the balance', () => {
+      const balance1 = 100;
+      const amount1 = 50;
+      const msg1 = `Your balance is $150.00`;
+      const bankAccount1 = new BankAccount('Bob', 'Robertson', balance1);
+      expect(bankAccount1.deposit(amount1)).toEqual(msg1);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      const amount2 = 12.34;
+      const msg2 = `Your balance is $162.34`;
+      expect(bankAccount1.deposit(amount2)).toEqual(msg2);
 
-  it('BankAccount - showBalance returns a message of the balance to two decimal places', () => {
-    const balance1 = 100;
-    const bankAccount1 = new BankAccount('Bob', 'Robertson', balance1);
-    expect(bankAccount1.showBalance()).toEqual(`Your balance is ${balance1.toFixed(2)}`);
+      const balance2 = 200;
+      const amount3 = 100;
+      const bankAccount2 = new BankAccount('Sarah', 'Haras', balance2);
+      const msg3 = `Your balance is $300.00`;
+      expect(bankAccount2.deposit(amount3)).toEqual(msg3);
 
-    const balance2 = 200;
-    const bankAccount2 = new BankAccount('Sarah', 'Haras', balance2);
-    expect(bankAccount2.showBalance()).toEqual(`Your balance is ${balance2.toFixed(2)}`);
+      const amount4 = 12.34;
+      const msg4 = `Your balance is $312.34`;
+      expect(bankAccount2.deposit(amount4)).toEqual(msg4);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-  it('BankAccount - defaults to a balance of 0 if a balance is not provided', () => {
-    const bankAccount = new BankAccount('John', 'Doe');
-    const balanceMsg = `Your balance is 0.00`;
-    expect(bankAccount.showBalance()).toEqual(balanceMsg);
+    it('withdraw subtracts the amount from the balance and returns a message of the balance', () => {
+      const balance1 = 100;
+      const amount1 = 50;
+      const msg1 = `Your balance is $50.00.`;
+      const bankAccount1 = new BankAccount('Bill', 'Bryers', balance1);
+      expect(bankAccount1.withdraw(amount1)).toEqual(msg1);
+      const amount2 = 11.25;
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      const msg2 = `Your balance is $38.75.`;
+      expect(bankAccount1.withdraw(amount2)).toEqual(msg2);
 
-  it('BankAccount - deposit adds the amount to the balance and returns a message of the balance', () => {
-    const balance1 = 100;
-    const amount1 = 50;
-    const msg1 = `Your balance is ${(balance1 + amount1).toFixed(2)}`;
-    const bankAccount1 = new BankAccount('Bob', 'Robertson', balance1);
-    expect(bankAccount1.deposit(amount1)).toEqual(msg1);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    const amount2 = 12.34;
-    const msg2 = `Your balance is ${(balance1 + amount1 + amount2).toFixed(2)}`;
-    expect(bankAccount1.deposit(amount2)).toEqual(msg2);
+    it('withdraw does not withdraw if the amount is greater than the balance', () => {
+      const bankAccount = new BankAccount('Simon', 'Sky', 100);
 
-    const balance2 = 200;
-    const amount3 = 100;
-    const bankAccount2 = new BankAccount('Sarah', 'Haras', balance2);
-    const msg3 = `Your balance is ${(balance2 + amount3).toFixed(2)}`;
-    expect(bankAccount2.deposit(amount3)).toEqual(msg3);
+      const amountToWithdraw = 200;
 
-    const amount4 = 12.34;
-    const msg4 = `Your balance is ${(balance2 + amount3 + amount4).toFixed(2)}`;
-    expect(bankAccount2.deposit(amount4)).toEqual(msg4);
+      const msg = `You do not have enough funds.`;
+      expect(bankAccount.withdraw(amountToWithdraw)).toBe(msg);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      const msg2 = `Your balance is $100.00`;
+      expect(bankAccount.showBalance()).toBe(msg2);
 
-  it('BankAccount - withdraw subtracts the amount from the balance and returns a message of the balance', () => {
-    const balance1 = 100;
-    const amount1 = 50;
-    const msg1 = `Your balance is ${(balance1 - amount1).toFixed(2)}`;
-    const bankAccount1 = new BankAccount('Bill', 'Bryers', balance1);
-    expect(bankAccount1.withdraw(amount1)).toEqual(msg1);
-    const amount2 = 11.25;
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    const msg2 = `Your balance is ${(balance1 - amount1 - amount2).toFixed(2)}`;
-    expect(bankAccount1.withdraw(amount2)).toEqual(msg2);
+    it('getTotalHoldings returns the total holdings across all BankAccount instances', () => {
+      expect(typeof BankAccount.getTotalHoldings).toBe('function');
+      expect(typeof BankAccount.getTotalHoldings()).toBe('number');
+      expect(BankAccount.getTotalHoldings()).not.toBe(NaN);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      // The current holdings will be !== 0 because of the prior tests utilizing
+      // The deposit and withdraw instance methods. So we'll get the starting
+      // holdings as a baseline, rounding to 2 decimals to handle floating point
+      // precision errors
+      const totalHoldingsBaseline = Number(BankAccount.getTotalHoldings().toFixed(2));
 
-  it('BankAccount - withdraw does not withdraw if the amount is greater than the balance', () => {
-    const balance = 100 + Math.floor((Math.random() * 100));
-    const bankAccount = new BankAccount('Simon', 'Sky', balance);
+      // We'll create an account with an initial balance of 5. The resulting
+      // total holdings should be 5 more than the baseline
+      const account1 = new BankAccount('John', 'a', 5);
+      expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 5);
 
-    const amountToWithdraw = balance * 2;
+      // We'll create a second account with no additional balance
+      const account2 = new BankAccount('Jane', 'b');
+      expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 5);
 
-    const msg = `You do not have enough funds.`;
-    expect(bankAccount.withdraw(amountToWithdraw)).toBe(msg);
+      account2.deposit(10);
+      expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 15);
 
-    const msg2 = `Your balance is ${balance.toFixed(2)}`;
-    expect(bankAccount.showBalance()).toBe(msg2);
+      // This shouldn't change the holdings since account1 does not have
+      // sufficient funds to withdraw 10
+      account1.withdraw(10);
+      expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 15);
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
+      // But this should
+      account1.withdraw(2);
+      expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 13);
 
-  it('BankAccount - adds only methods to the prototype', () => {
-    const bankAccount = new BankAccount('Simon', 'Sky');
-    const bankAccountPrototype = Object.getPrototypeOf(bankAccount);
-    expect(Object.getOwnPropertyNames(bankAccountPrototype).sort()).toEqual([
-      'constructor',
-      'deposit',
-      'showBalance',
-      'withdraw',
-    ]);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    });
 
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
-
-  it('BankAccount - the BankAccount class has a getTotalHoldings method and NO additional public class properties', () => {
-    // these are property names given to EVERY class by default
-    const defaultObjectPropertyNames = [
-      'length',
-      'name',
-      'prototype',
-    ];
-
-    // we expect your BankAccount class to have those default properties
-    // and the getTotalHoldings method. You should NOT have any public
-    // class property for the total holdings value (but it can be private!)
-    const expectedPropertyNames = [
-      'getTotalHoldings',
-      ...defaultObjectPropertyNames,
-    ];
-
-    expect(Object.getOwnPropertyNames(BankAccount).sort()).toEqual(expectedPropertyNames.sort());
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
-  });
-
-  it('BankAccount - tracks total holdings across all BankAccount instances', () => {
-    expect(typeof BankAccount.getTotalHoldings()).toBe('number');
-    expect(BankAccount.getTotalHoldings()).not.toBe(NaN);
-    
-    // The current holdings will be !== 0 because of the prior tests utilizing
-    // The deposit and withdraw instance methods. So we'll get the starting
-    // holdings as a baseline, rounding to 2 decimals to handle floating point
-    // precision errors
-    const totalHoldingsBaseline = +BankAccount.getTotalHoldings().toFixed(2);
-
-    // We'll create an account with an initial balance of 5. The resulting
-    // total holdings should be 5 more than the baseline
-    const account1 = new BankAccount('John', 'a', 5);
-    expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 5);
-
-    // We'll create a second account with no additional balance
-    const account2 = new BankAccount('Jane', 'b');
-    expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 5);
-
-    account2.deposit(10);
-    expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 15);
-
-    // This shouldn't change the holdings since account1 does not have
-    // sufficient funds to withdraw 10
-    account1.withdraw(10);
-    expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 15);
-
-    // But this should
-    account1.withdraw(2);
-    expect(BankAccount.getTotalHoldings()).toEqual(totalHoldingsBaseline + 13);
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   // IGNORE PLEASE

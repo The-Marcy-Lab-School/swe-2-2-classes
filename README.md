@@ -8,101 +8,219 @@
 - [Questions](#questions)
   - [Question 1:](#question-1)
 
+## Reminders
+
+### Asking ChatGPT for Help
+
+If you’re stuck, you may use ChatGPT to clarify the assignment — but not to solve it for you. To do this, copy the meta-prompt below into ChatGPT along with the assignment question.
+
+> You are acting as a tutor. Your job is to explain what this coding question is asking, clarify confusing wording, and highlight the relevant concepts students need to know — but do not provide the full solution or code that directly answers the question. Instead, focus on rephrasing the problem in simpler terms, identifying what’s being tested, and suggesting what steps or thought processes might help. Ask guiding questions to ensure the student is thinking critically. Do not write the final function, algorithm, or code implementation.
+
+Be mindful of your AI usage on assignments. AI can be a great tool to help your learning but it can also be detrimental if you let it do too much of the thinking for you.
+
+### Be Okay With Being "Provisionally Complete"
+
+At Marcy, we will deem an assignment as "complete" if the solution passes at least **75%** of the automated tests. 
+
+However, we know many of you will feel the urge to hold off on submitting until your assignment feels 100% perfect. That drive for excellence is an asset!
+
+But perfectionism can also get in the way of learning — especially when we need to cover a lot in a short amount of time.
+
+That’s why we encourage you to be comfortable with being **“provisionally complete.”** This means:
+
+- Submitting your work even if it isn’t perfect yet
+- Treating submission as a checkpoint, not a finish line
+- Committing to return, revise, and improve later
+
+Learning to move forward with provisional completeness will help you make steady progress while still building the habit of continuous improvement.
+
 ## Setup
 
-For guidance on setting up and submitting this assignment, refer to the Marcy lab School Docs How-To guide for [Working with Short Response and Coding Assignments](https://marcylabschool.gitbook.io/marcy-lab-school-docs/fullstack-curriculum/how-tos/working-with-assignments#how-to-work-on-assignments).
+For guidance on setting up and submitting this assignment, refer to the Marcy lab School Docs How-To guide for [Working with Short Response and Coding Assignments](https://marcylabschool.gitbook.io/marcy-lab-school-docs/how-tos/working-with-assignments#how-to-work-on-assignments).
 
-After cloning your repository, make sure to run the following commands:
-
-```sh
-npm i
-git checkout -b draft
-npm t
-```
-
-## Testing Your Code
-
-### Submitting On Time
-
-You have to understand that "grades" don't exist at Marcy. We only need performance data in order to know how you're doing, and make sure the people who need help get it as quickly as they can. It's ok if you didn't finish by the deadline! Just show us what you have. We'll have office hours and reviews, and we want to know what you are all struggling with so we can use those meetings effectively. **This is not about grades, its about seeing what you know, and where we can help!**
-
-### playground.js
-
-The most straightforward way to test your code is to test your code by hand as you work. Invoke your functions and use `console.log()` to print out the results. Then, `cd` into the `src/` directory and use the `node <file_name>` command to run your JavaScript files. 
-
-You can also create what's called a "playground" (or "sandbox") file where you import any code you need, and then mess around with that file. We've included one in the `src` directory so you can see it. Run that program using `node src/playground.js`.
-
-### npm test
-
-Before submitting your code, make sure you got things right by running the provided automated tests.
-
-You can do this using the commands:
+Here are some useful commands to remember.
 
 ```sh
+npm i                   # install dependencies
+git checkout -b draft   # switch to the draft branch before starting
+
 npm test # run the automated tests
 npm run test:w # run the automated tests and rerun them each time you save a change
+
+git add -A              # add a changed file to the staging area
+git commit -m 'message' # create a commit with the changes
+git push                # push the new commit to the remote repo
 ```
 
-You will know that you have "completed" an assignment once you have passed 75% or more of the automated tests!
+## Short Response Questions
 
-## Questions
+Short response questions can be found in the `src/short-response.md` file. Write your responses directly in that file! Do not forget to complete this part of the assignment.
 
-# Question 1 - Circle
+### Prompt 1
 
-Create a class `Circle`. Each instance should have the following properties:
-- `radius`
-- `color`
+With OOP in JavaScript, it's possible to use factory functions to achieve encapsulation and re-use them to make objects that look alike. However, factory functions have drawbacks and we often use classes instead.
 
-Each instance should have the following methods:
-- `getArea`
-- `getCircumference`
-- `draw`
-- `changeColor`
+How would you explain to a budding developer what the drawbacks of using factory functions are and why it is better to use classes instead?
 
-# Question 2 - BankAccount
-Create a class `BankAccount`. Check out the tests for the methods and properties. But here's a little hint: you need some way to track the balance, but the balance can only be altered by other methods. It isn't visible to the outside world. Do you know how to hide a class property?
+### Prompt 2
 
+Explain what factors you should consider when deciding to make a property/method private? Provide an example to support your response.
 
-# Going Beyond
-We've been at Marcy for months now, and you've learned so much already. It's incredible! We're still going to be explaining a lot and teaching you a ton more, but it's time we work on making you "Auto-Didacts." That just means "self-taught learners." And luckily, that simply boils down to figuring out what you *don't* know, and taking the steps to fill in those gaps.
+### Prompt 3
 
-## What *should* you know
-This is a crucial question for self learning. It's why note taking is so important in lectures. You need to go back over the topics covered and really be honest with yourself about what you understand.
+Explain what factors you should consider when deciding to make a property/method static? Provide an example to support your response.
 
-A good way to test that is to try explaining a topic to someone. If you can't explain it simply, you probably don't know it.
+## From Scratch
 
-Another strategy is to take examples and problems, and then modify them. So if we asked you to make a `Car` class, you'd make a `Bike` class. If you know how to make a closure that makes a number go up, make a closure that adds things to a list. Then removes them. Then modifies them. You get the idea. Start with something you know, and keep modifying it until you *don't*. Then figure it out!
+### Question 1 - Rectangle
 
-## A cheat sheet of topics
-To be friendly, here's the broad strokes of everything we covered this week:
-- Closures
-- Closures that specifically return functions
-- Factory Functions
-- this
-- Factory functions with this/closures
-- `new`
-- Classes
-- Private class properties
-- Private class methods
+Create a class `Rectangle`.
 
-Do you understand exactly how those all work? If the answer to that is "no" for any one of them, then you know where to start.
+The `Rectangle()` constructor accepts two parameters: 
+- `length` (number)
+- `width` (string)
 
-## What's coming up
-Now in addition to solidifying knowledge (which is arguably more important here), we should also be thinking about the future. What's coming up? Luckily, this naturally comes up just by Googling and talking to ChatGPT. You'll stumble into related topics. Research those a little bit to help bring clarity.
+Instance methods:
+- `getArea` — returns the area of the rectangle (length * width)
+- `getPerimeter` — returns the perimeter of the rectangle (sum of all four sides)
+- `isSquare` — returns `true` if the rectangle is a square, `false` if not
 
-However, you're enrolled in a school, so "what are we learning next lesson?" is not hypothetical. I'll tell you the topics! After you're sure you understand everything we did this week, take some time to research these:
+Example Usage:
+```js
+const myShape = new Rectangle(10, 5); // length = 10, width = 5
+console.log(myShape.getArea()); // 50
+console.log(myShape.getPerimeter()); // 30 (10 * 2 + 5 * 2)
+console.log(myShape.isSquare()); // false
 
-- Class properties/methods vs instance properties/methods
-- the static keyword
-- inheritance
-- the extends keyword
-- why is `this` so weird?
-- What are class getters/setters
-- Why people have strong opinions against getters/setters
+// length and width are public properties so we can mutate them
+myShape.width = 3;
+myShape.length = 3;
+console.log(myShape.getArea()); // 9
+console.log(myShape.getPerimeter()); // 12
+console.log(myShape.isSquare()); // true
+```
 
-## beyond.js
-We have no tests for anything in this file, but we want to see you practice. Write code, write comments, ask questions, then answer them. Do whatever you feel will help you, but do it in this file so we can see.
+### Question 2 - Car
 
-This is not just a light assignment to give you free time. This assignment is dipping your toe into the pool of self learning and seeing how it feels. Companies want Jrs. who are self reliant. People who can be trusted to take responsibility for understanding something. And like every skill, that takes practice.
+Create a class `Vehicle`.
 
-So let's start now!
+The `Vehicle()` constructor accepts two parameters:
+- `type` (string)
+- `capacity` (number)
+
+The `Vehicle()` constructor also accepts a third optional parameter:
+- `color` (initialize to `"black"`)
+
+Default instance properties:
+- `passengers` (initialize to an empty array)
+
+Instance methods:
+- `paint(color)` — updates the vehicle's color and returns the new color.
+- `addPassenger(passenger)` — adds a passenger to the vehicle and returns the number of passengers. If the capacity is full, do not add the passenger and instead return `-1`;
+
+Example Usage:
+```js
+const bus = new Vehicle('School Bus', 48, 'yellow');
+console.log(bus.color); // yellow
+
+const motorcycle = new Vehicle('Motorcycle', 2);
+console.log(motorcycle.color); // black
+
+console.log(motorcycle.addPassenger('Bonnie')); // 1
+console.log(motorcycle.addPassenger('Clyde')); // 2
+console.log(motorcycle.addPassenger('Toto')); // -1 (not enough capacity, not added)
+
+console.log(motorcycle.passengers); // ['Bonnie', 'Clyde']
+```
+
+### Question 3 — PasswordManager
+
+Create a class `PasswordManager` that manages a private password (string).
+
+The `PasswordManager()` constructor accepts one parameter:
+- `password` (string)
+
+Instance methods:
+- `checkPassword(attempt)` — compares the provided `attempt` with the private password. Returns `true` if they match, `false` otherwise.
+- `setPassword(oldPassword, newPassword)` — compares the provided `oldPassword` with the private password. If they match, updates the private password to the provided `newPassword` and returns `true`. Otherwise, returns `false`.
+
+Example Usage:
+
+```js
+
+const myPW = new PasswordManager('abc');
+console.log(myPW.checkPassword('abc')); // true
+console.log(myPW.checkPassword('blah')); // false
+
+console.log(myPW.setPassword('blah', 'foobar')); // false
+console.log(myPW.setPassword('abc', 'foobar')); // true
+
+console.log(myPW.checkPassword('foobar')); // true
+```
+
+### Question 4 — TodoList
+
+Create a class `TodoList` that manages a private array of todo items (strings).
+
+The `TodoList()` constructor accepts one parameter:
+- `title` (string)
+
+Instance methods:
+- `addItem(description)` — adds a new item to the list of items with the given description and returns the new length of the list.
+- `removeItem(description)` — finds and removes the item from the list that matches the description and returns the removed item. If an item with a matching description is not found, return `null` instead.
+- `getItems()` — returns a copy of the private items array.
+
+Example Usage:
+
+```js
+const groceryList = new TodoList('groceries');
+console.log(groceryList.getItems()); // []
+
+console.log(groceryList.addItem('bread'));  // 1
+console.log(groceryList.addItem('milk'));   // 2
+console.log(groceryList.addItem('eggs'));   // 3
+console.log(groceryList.getItems()); // ['bread', 'milk', 'eggs']
+
+console.log(groceryList.removeItem('milk'));   // milk
+console.log(groceryList.removeItem('cheese')); // null
+console.log(groceryList.getItems()); // ['bread', 'eggs']
+
+// Get a copy of the internal array
+const items = groceryList.getItems();
+items.length = 0;
+
+// The internal array is not affected by the previous statement
+console.log(groceryList.getItems()); // ['bread', 'eggs'] 
+```
+
+### Question 5 - BankAccount
+
+Create a class `BankAccount` that manages a private balance (a number). The `BankAccount` class should also keep a private total of the balances across all instances.
+
+The `BankAccount()` constructor accepts two parameters:
+- `firstName` (string)
+- `lastName` (string)
+
+The `BankAccount()` constructor also accepts a third optional parameter:
+- `balance` (defaults to `0`, sets an initial value for the private balance)
+
+Instance methods:
+- `deposit(amount)` — adds the amount to the balance and returns a message of the balance `Your balance is $[new balance].00`
+- `withdraw(amount)` — subtracts the amount from the balance and returns a message of the balance `Your balance is $[new balance].00`. If the given amount to withdraw is greater than the balance, do not subtract the balance and instead return `You do not have enough funds.`
+
+Static methods:
+- `getTotalHoldings()` — returns the total balance across all `BankAccount` instances
+
+Example Usage:
+
+```js
+const account1 = new BankAccount('Alan', 'Turing'); // starts with 0 balance
+const account2 = new BankAccount('Ada', 'Lovelace', 100); // starts with 100 balance
+
+console.log(account1.deposit(50));    // prints "Your new balance is $50.00"
+console.log(account1.deposit(20.5));  // prints "Your new balance is $70.50"
+console.log(account1.withdraw(10));   // prints "Your new balance is $60.50"
+console.log(account1.withdraw(100));  // prints "You do not have enough funds"
+
+console.log(BankAccount.getTotalHoldings()); // prints 160.50
+```
