@@ -7,7 +7,6 @@ const scoresDir = path.join(__dirname, '..', 'scores');
 const scoreCounter = new ScoreCounter(testSuiteName, scoresDir);
 
 describe(testSuiteName, () => {
-
   describe('Rectangle', () => {
     it('constructor accepts length and width parameters', () => {
       const myShape = new Rectangle(10, 5);
@@ -380,7 +379,6 @@ describe(testSuiteName, () => {
 
       scoreCounter.correct(expect); // DO NOT TOUCH
     });
-
   });
 
   // IGNORE PLEASE
